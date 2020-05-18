@@ -55,18 +55,21 @@ $art[] = [0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0];
 */
 
 /* Just some array variables */
-$previous = null; //Tells the script which pixel was the previous one
+$previous = 3; //Tells the script which pixel was the previous one.
 $length = 1; //The length of each pixelrow
 $temprow = array(); //Poor naming(?), but temporarily holding each "artrow"
 $newarray = array(); //Another poor naming, it's the art array that we'll be working on when generating the table
 
 foreach($art as $a) {
+	//$a = array_reverse($a); //If your art is still too big, you could try to reverse it, and see if that reduces the character ammount?
 	/* Make Pixelgroups, so that we can use colspan */
 	foreach($a as $pixel) {
 		/* If the previous pixel is the same as current pixel, we add to the colspan length */
 		if($previous == $pixel) {
 			$length++;
-		} 
+		} elseif($previous === 3) {
+			
+		}
 		/* Else we put the previous pixed plus its length in a temporary array for the row */
 		else {
 			$temprow[] = [$previous, $length];
@@ -85,7 +88,7 @@ foreach($art as $a) {
 	
 	/* Reset the pixelgroup settings */
 	$length = 1;
-	$previous = null;
+	$previous = 3;
 	$newarray[] = $temprow;
 	$temprow = array();
 }
